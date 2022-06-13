@@ -21,6 +21,6 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
     # Reading data
     data = pd.read_csv(csv_file)
     print(data.head())
-    return ('linear', 1.1)
+    return ('linear', 1.2)
 
 print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight-height.csv", (1, "Height"), (2, "Weight")))
