@@ -9,12 +9,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, str]) -> float:
+def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, str]) -> tuple[str, float]:
     """Return a tuple value:[type of correlation (ex. linear), correlation coefficient]
     
         Arguments:
+        csv_file containingt data set
         column1[0] and column2[0] are int values rep. column from left to right.
         column1[1] and column2[1] are str which rep. name of variable within column
+ 
+    """
+    # Reading data
+    data = pd.read_csv(csv_file)
+    print(data.head())
+    return ('linear', 1.1)
 
-        Types of correlation: linear, exponential"""
-        
+print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight-height.csv", (1, "Height"), (2, "Weight")))
