@@ -16,7 +16,7 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
         Arguments:
         csv_file containingt data set
         column1[0] and column2[0] are int values rep. column from left to right.
-        column1[1] and column2[1] are str which rep. name of variable within column
+        column1[1] and column2[1] are str which rep. name of variable within column. column1 is the independent var*
  
     """
     # Reading data
@@ -46,32 +46,38 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
     slope = numer / denom
     c = mean_y - (slope * mean_x)
 
-    print(slope)
-    print(c)
+    """
+    # Plotting Values and Regression line on Graph
 
-    # plotting values and regression line
-
-    max_x = np.max(x_var) + 100
-    min_x = np.min(x_var) - 100
+    max_x = np.max(x_var) + 10
+    min_x = np.min(x_var) - 10
 
     # calculating line values x and y
-    x = np.linspace(min_x, max_x, 49)
-    y = c + slope * x_var
-
-    print(x)
+    x = np.linspace(min_x, max_x, 1000)
+    y = c + (slope * x)
 
     # ploting line
     plt.plot(x, y, color='#58b970', label='Regression Line')
     # Plotting Scatter Points
     plt.scatter(x_var, y_var, c="#ef5423", label='Scatter Plot')
 
-    print(slope)
-
     plt.xlabel('"Height"')
     plt.ylabel("Weight")
     plt.legend()
     plt.show()
+    """
+
+    # Calculating R2 Score
+    ss_tot = 0
+    ss_res = 0
+    for i in range(n):
+        y_pred = c + (slope * x_var[i])
+        ss_tot += (y_var[i] - mean_y) ** 2
+        ss_res += (y_var[i] - y_pred) ** 2
+    r2 = 1 - (ss_res/ss_tot)
+    print("R2 Score")
+    print(r2)
 
     return (str(slope), c)
 
-print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height_small.csv", (1, "Height"), (2, "Weight")))
+print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height_medium.csv", (1, "Weight"), (2, "Height")))
