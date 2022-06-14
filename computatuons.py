@@ -10,24 +10,49 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, str]) -> tuple[str, float]:
-    """Return a tuple value:[type of correlation (ex. linear), correlation coefficient]
+csv_file = input("Input Dataset (Path):")
+
+def determine_pearson_coefficient(csv_file, column1: tuple[int, str], column2: tuple[int, str]) -> tuple[str,float]:
+    """ Return a float value rep. the pearson coefficient between the listed variables"""
+    
+    data = pd.read_csv(csv_file)
+
+    x_var = data[column1[1]].values
+    y_var = data[column2[1]].values
+
+    # mean x var and y var
+    mean_x = np.mean(x_var)
+    mean_y = np.mean(y_var)
+
+    # Total number of values
+    n = len(x_var)
+
+    sum = 0
+
+    for i in range(n):
+        sum += ((x_var[i] - mean_x) * (y_var[i] - mean_y))
+
+    # Covariant value
+    covar = sum/(n-1)
+
+    # Pearson's correlation coefficient
+    return ("Pearson's Correlation Coefficient", (covar / (np.std(x_var) * np.std(y_var))))
+
+"""
+def find_r2_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, str]) -> tuple[str, float]:
+    Return a tuple value:[type of correlation (ex. linear), r2 value of model]
     
         Arguments:
         csv_file containingt data set
         column1[0] and column2[0] are int values rep. column from left to right.
         column1[1] and column2[1] are str which rep. name of variable within column. column1 is the independent var*
  
-    """
+    
     # Reading data
     data = pd.read_csv(csv_file)
-
-    print(data.shape)
     
     x_var = data[column1[1]].values
     y_var = data[column2[1]].values
-
-    print(len(x_var))
 
     # mean x var and y var
     mean_x = np.mean(x_var)
@@ -46,7 +71,7 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
     slope = numer / denom
     c = mean_y - (slope * mean_x)
 
-    """
+    
     # Plotting Values and Regression line on Graph
 
     max_x = np.max(x_var) + 10
@@ -65,7 +90,7 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
     plt.ylabel("Weight")
     plt.legend()
     plt.show()
-    """
+    
 
     # Calculating R2 Score
     ss_tot = 0
@@ -80,4 +105,7 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
 
     return (str(slope), c)
 
-print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height.csv", (1, "Weight"), (2, "Height")))
+print(find_line_best_fit(csv_file, (1, "Weight"), (2, "Height")))
+"""
+
+print(determine_pearson_coefficient(csv_file, (1, "Weight"), (2, "Height")))
