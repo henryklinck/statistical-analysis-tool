@@ -80,4 +80,4 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
 
     return (str(slope), c)
 
-print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height_medium.csv", (1, "Weight"), (2, "Height")))
+print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height.csv", (1, "Weight"), (2, "Height")))
