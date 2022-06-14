@@ -5,6 +5,7 @@
 
 # Not sure how to get input, csv file, assume data is 'tidy'
 
+from cProfile import label
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -20,7 +21,57 @@ def find_line_best_fit(csv_file, column1: tuple[int, str], column2: tuple[int, s
     """
     # Reading data
     data = pd.read_csv(csv_file)
-    print(data.head())
-    return ('linear', 1.2)
 
-print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight-height.csv", (1, "Height"), (2, "Weight")))
+    print(data.shape)
+    
+    x_var = data[column1[1]].values
+    y_var = data[column2[1]].values
+
+    print(len(x_var))
+
+    # mean x var and y var
+    mean_x = np.mean(x_var)
+    mean_y = np.mean(y_var)
+
+    # Total number of values
+    n = len(x_var)
+
+    # Fit regression line
+    numer = 0
+    denom = 0
+    for i in range(n):
+        numer += (x_var[i] - mean_x) * (y_var[i] - mean_y)
+        denom += (x_var[i] - mean_x) ** 2
+
+    slope = numer / denom
+    c = mean_y - (slope * mean_x)
+
+    print(slope)
+    print(c)
+
+    # plotting values and regression line
+
+    max_x = np.max(x_var) + 100
+    min_x = np.min(x_var) - 100
+
+    # calculating line values x and y
+    x = np.linspace(min_x, max_x, 49)
+    y = c + slope * x_var
+
+    print(x)
+
+    # ploting line
+    plt.plot(x, y, color='#58b970', label='Regression Line')
+    # Plotting Scatter Points
+    plt.scatter(x_var, y_var, c="#ef5423", label='Scatter Plot')
+
+    print(slope)
+
+    plt.xlabel('"Height"')
+    plt.ylabel("Weight")
+    plt.legend()
+    plt.show()
+
+    return (str(slope), c)
+
+print(find_line_best_fit(r"C:\Users\admin\OneDrive\Projects\statistical-analysis-tool\sample_data\weight_height_small.csv", (1, "Height"), (2, "Weight")))
