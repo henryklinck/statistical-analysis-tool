@@ -41,7 +41,9 @@ function computePearsonsCoef(var1raw, var2raw) {
      var var1 = var1raw.slice(1);
      var var2 = var2raw.slice(1);
 
-     if (isNaN(var1)) {
+     return var1
+
+     if (isNaN(var1[0])) {
         var1type = "categorical";
         var numvar1 = [];
         var varvalues1 = [];
@@ -54,7 +56,7 @@ function computePearsonsCoef(var1raw, var2raw) {
         var1 = numvar1;
      }
      
-     if (isNaN(var2)) {
+     if (isNaN(var2[0])) {
         var2type = "categorical";
         var numvar2 = [];
         var varvalues2 = [];
@@ -62,7 +64,7 @@ function computePearsonsCoef(var1raw, var2raw) {
             if (!(varvalues2.includes(var2[j]))) {
                 varvalues2.push(var2[j]);
             }
-            numvar2[j] = varvalues2.indexOf(var2[j]);
+            numvar2[j] = varvalues2.indexOf(var2[j] + 1);
         }
         var2 = numvar2;
      }
@@ -71,14 +73,14 @@ function computePearsonsCoef(var1raw, var2raw) {
      var sumvar2 = 0;
 
      for (let k=0; k < var1.length; k++) {
-        sumvar1 += var1[k];
-        sumvar2 += var2[k];
+        sumvar1 += parseInt(var1[k]);
+        sumvar2 += parseInt(var2[k]);
      }
 
      var meanvar1 = (sumvar1 / var1.length);
      var meanvar2 = (sumvar2 / var2.length);
 
-     return meanvar1
+     return sumvar1
     
 }
 
@@ -92,7 +94,7 @@ inputdata.addEventListener('submit', function (e) {
     reader.onload = function (e) {
         const text = e.target.result;
         const data = csvToArray(text, numvar.value);
-        var result = computePearsonsCoef(data[1], data[2]);
+        var result = computePearsonsCoef(data[0], data[2]);
         
 
         // document.getElementById("result").innerHTML = data;
