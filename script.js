@@ -4,26 +4,33 @@ let numvar = document.getElementById("num-value-input");
 
 function csvToArray(str, numvar, delimiter = ",") {
 
-    const values1 = str.split(delimiter);
-    
-    const numrows = (values1.length / numvar);
+    // slice from start of text to the first \n index
+    // use split to create an array from string by delimiter
+    const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
+
+    // slice from \n index + 1 to the end of the text
+    // use split to create an array of each csv value row
+    const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+    const lenrows = rows.length
 
     // check if there are values in original data, not a perfect method
-    if (((values1.length / numrows) / numvar) != 1) {
-        window.alert("ERROR: Wrong Num of Vars or Invalid Data (commas in data or improper format)")
-        return
-    }
+    //if (((rows.length / numrows) / numvar) != 1) {
+    //    window.alert("ERROR: Wrong Num of Vars or Invalid Data (commas in data or improper format)")
+    //    return
+    //}
 
     var allvalues1 = [];
 
     for (let j=0; j < numvar; j++) {
-        allvalues1.push(values1[j])
+        allvalues1[j] = new Array
+        allvalues1[j].push(headers[j]);
+        for (let i=1; i<lenrows; i++) {
+            usablerow = rows[i].split(delimiter)
+            allvalues1[j].push(usablerow[j]);
+        }
     }
 
-    //for (let i=1; i < numrows; i++)
-
-
-    return allvalues1
+    return allvalues1[1]
 
     // slice from start of text to the first \n index
     // use split to create an array from string by delimiter
