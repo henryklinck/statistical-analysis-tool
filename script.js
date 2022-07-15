@@ -53,6 +53,7 @@ function computePearsonsCoef(var1raw, var2raw) {
         }
         if (varvalues1.length < 2) {
             window.alert(var1raw[0] + "Has only 1 element")
+            return
         }
         var1 = numvar1;
     }
@@ -103,6 +104,39 @@ function computePearsonsCoef(var1raw, var2raw) {
     return pcoefficient.toFixed(4);
 }
 
+function determineStrongestCorr(dataasarray, numofvariables) {
+    // Return list of strongest correlations and the associated correlation coefficients
+    const data = dataasarray;
+    var strongestcorrelations = new Map();
+    var covaluessofar = new Array;
+    
+    for (let i=0; i < numofvariables; i++) {
+        for (let j=0; j < numofvariables; j++) {
+            if (i != j) {
+                covaluessofar.push(i, j);
+                var pcoffvalue = computePearsonsCoef(data[i], data[j]);
+                strongestcorrelations.set(pcoffvalue, String(data[i][0] + "+ " + data[j][0]));
+            }
+        }
+    }
+
+    var resultvars = String();
+    var resultvarscorr = String();
+    var maxcorrsofar = 0;
+
+    for (const key of strongestcorrelations.keys()) {
+        if (Math.abs(key) > maxcorrsofar) {
+            resultvars = strongestcorrelations.get(key);
+            resultvarscorr = String(key)
+            maxcorrsofar = Math.abs(key);
+        }
+
+      }
+
+
+    return "Strongest Pearson's Correlation is: " + resultvarscorr + " between" + resultvars
+}
+
 inputdata.addEventListener('submit', function (e) {
     e.preventDefault;
     const input = csvfile.files[0];
@@ -113,7 +147,7 @@ inputdata.addEventListener('submit', function (e) {
     reader.onload = function (e) {
         const text = e.target.result;
         const data = csvToArray(text, numvar.value);
-        var result = computePearsonsCoef(data[0], data[2]);
+        var result = determineStrongestCorr(data, numvar.value);
         
 
         // document.getElementById("result").innerHTML = data;
