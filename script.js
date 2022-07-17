@@ -134,7 +134,7 @@ function determineStrongestCorr(dataasarray, numofvariables) {
       }
 
 
-    return "Strongest Pearson's Correlation is: " + resultvarscorr + " between" + resultvars
+    return "The Strongest Correlation in Your Data is Between : " + resultvars +  ". Pearson's Coefficient Value: " + resultvarscorr
 }
 
 inputdata.addEventListener('submit', function (e) {
