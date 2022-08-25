@@ -120,27 +120,23 @@ function determineStrongestCorr(dataasarray, numofvariables) {
         }
     }
 
-    var resultvars = String();
-    var resultvarscorr = String();
-    var maxcorrsofar = 0;
+    let correlation_values = Array.from( strongestcorrelations.keys() );
 
-    for (const key of strongestcorrelations.keys()) {
-        if (Math.abs(key) > maxcorrsofar) {
-            resultvars = strongestcorrelations.get(key);
-            resultvarscorr = String(key)
-            maxcorrsofar = Math.abs(key);
-        }
+    var desc_correlation_values = correlation_values.sort(function(a, b){return b - a})
 
-      }
+    var result_message = "";
 
+    for (let i=0; i < strongestcorrelations.size; i++) {
+        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + ", Pearson's Correlation: " + desc_correlation_values[i] + " --- ";
+    }
 
-    return "The Strongest Correlation in Your Data is Between : " + resultvars +  ". Pearson's Coefficient Value: " + resultvarscorr
+    return result_message
+  
 }
 
 inputdata.addEventListener('submit', function (e) {
     e.preventDefault;
     const input = csvfile.files[0];
-    // window.alert(typeof input)
     const reader = new FileReader();
     
 
@@ -149,14 +145,16 @@ inputdata.addEventListener('submit', function (e) {
         const data = csvToArray(text, numvar.value);
         var result = determineStrongestCorr(data, numvar.value);
         
-
-        // document.getElementById("result").innerHTML = data;
+        //document.getElementById("result_section").innerHTML = result;
         //document.getElementById("show-result").innerHTML = numvar.value;
         // window.alert(JSON.stringify(data));
         // window.alert(data);
         // var basic_data = JSON.stringify(data[0]);
+
         document.write(result);
       };
       reader.readAsText(input);
       
-    });
+});
+
+
