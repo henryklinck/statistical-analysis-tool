@@ -101,7 +101,7 @@ function computePearsonsCoef(var1raw, var2raw) {
 
     var pcoefficient = (numeratorsum / ((denominatorsum1 ** (1/2)) * (denominatorsum2 ** (1/2))));
     
-    return pcoefficient.toFixed(4);
+    return Math.abs(pcoefficient.toFixed(4));
 }
 
 function determineStrongestCorr(dataasarray, numofvariables) {
