@@ -5,7 +5,22 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-h1{
+#container {
+  display: flex;
+  align-items: center;
+}
+
+#container p {
+  margin-left: 1em;
+}
+
+img{
+  padding: 5px;
+  width: 150px;
+}
+
+.description{
+  padding: 5px;
   color: black;
 }
 

@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1 class="header"> Data Analytics Tool </h1>
+    <div id='container'>
+        <img src="lookout_point_logo.png">
+        <p class="description">
+            Welcome to "The Lookout Point Data Analytics Tool". This tool provides data analysts with a basic breakdown of the Strongest to Weakest correlated variables in their dataset (Absolute Pearson's Correlation). This tool can be used to get a initial basic understanding of a dataset. Also, this tool may provide insight into unexpected related variables. 
+        </p>
+      </div>
+
     <div class="wrapper">
         <form id="input-data">
             <label for="csv-input">Input csv file</label> <br>
@@ -16,7 +22,6 @@
             <label for="num-value-input">Number of Variables (Columns) in Data (Between 1 and 20)</label> <br>
             <input type="number" id="num-value-input" min="1" max="20"> <br> <br>
             <input type="submit" value="Submit">
-            <p id="show-result">Test</p> <br>
         </form> <br>
         
     </div> 

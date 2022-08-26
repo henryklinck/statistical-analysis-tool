@@ -127,7 +127,7 @@ function determineStrongestCorr(dataasarray, numofvariables) {
     var result_message = "";
 
     for (let i=0; i < strongestcorrelations.size; i++) {
-        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + ", Pearson's Correlation: " + desc_correlation_values[i] + " --- ";
+        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + ", Pearson's Correlation: " + desc_correlation_values[i] + " |---| ";
     }
 
     return result_message
