@@ -139,7 +139,6 @@ inputdata.addEventListener('submit', function (e) {
     const input = csvfile.files[0];
     const reader = new FileReader();
     
-
     reader.onload = function (e) {
         const text = e.target.result;
         const data = csvToArray(text, numvar.value);
