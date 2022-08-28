@@ -78,8 +78,8 @@ function computePearsonsCoef(var1raw, var2raw) {
     var sumvar2 = 0;
 
     for (let k=0; k < var1.length; k++) {
-        sumvar1 += parseInt(var1[k]);
-        sumvar2 += parseInt(var2[k]);
+        sumvar1 += parseFloat(var1[k]);
+        sumvar2 += parseFloat(var2[k]);
     }
 
     var meanvar1 = (sumvar1 / var1.length);
@@ -115,7 +115,7 @@ function determineStrongestCorr(dataasarray, numofvariables) {
             if (i != j) {
                 covaluessofar.push(i, j);
                 var pcoffvalue = computePearsonsCoef(data[i], data[j]);
-                strongestcorrelations.set(pcoffvalue, String(data[i][0] + "+ " + data[j][0]));
+                strongestcorrelations.set(pcoffvalue, String(data[i][0] + " + " + data[j][0]).bold());
             }
         }
     }
@@ -127,7 +127,7 @@ function determineStrongestCorr(dataasarray, numofvariables) {
     var result_message = "";
 
     for (let i=0; i < strongestcorrelations.size; i++) {
-        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + ", Pearson's Correlation: " + desc_correlation_values[i] + " |---| ";
+        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + " => Pearson's Correlation: " + desc_correlation_values[i] + " |---| ";
     }
 
     return result_message
