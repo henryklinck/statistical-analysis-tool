@@ -77,26 +77,23 @@ function computePearsonsCoef(var1raw, var2raw) {
     var sumvar1 = 0;
     var sumvar2 = 0;
 
-    for (let k=0; k < var1.length; k++) {
+    var is_total_bedrooms = false;
+
+    for (let k=0; k < (var1.length - 1); k++) {
         sumvar1 += parseFloat(var1[k]);
+        if (var1[k] == 129.0) {
+            is_total_bedrooms = true;
+        }
         sumvar2 += parseFloat(var2[k]);
     }
 
     var meanvar1 = (sumvar1 / var1.length);
     var meanvar2 = (sumvar2 / var2.length);
 
-    // Testing why total_bedrooms isn't working
-    
-    if (isNaN(meanvar1)) {
-        console.log(var1raw);
+    if (is_total_bedrooms == true) {
+        console.log("Here");
         console.log(sumvar1);
     }
-
-    if (isNaN(meanvar2)) {
-        console.log(var2raw);
-        console.log(sumvar2);
-    }
-
 
     // Calculate sum[(x_i - x_hat)(y_i - y_hat)]
     var numeratorsum = 0;
@@ -104,9 +101,9 @@ function computePearsonsCoef(var1raw, var2raw) {
     var denominatorsum2 = 0;
     var var1_i = 0;
     var var2_i = 0;
-    for (let p=0; p < var1.length; p++) {
-        var1_i = parseInt(var1[p]);
-        var2_i = parseInt(var2[p]);
+    for (let p=0; p < (var1.length - 1); p++) {
+        var1_i = parseFloat(var1[p]);
+        var2_i = parseFloat(var2[p]);
         numeratorsum += ((var1_i - meanvar1) * (var2_i - meanvar2));
         denominatorsum1 += ((var1_i - meanvar1) ** 2);
         denominatorsum2 += ((var2_i - meanvar2) ** 2);
@@ -121,12 +118,10 @@ function determineStrongestCorr(dataasarray, numofvariables) {
     // Return list of strongest correlations and the associated correlation coefficients
     const data = dataasarray;
     var strongestcorrelations = new Map();
-    var covaluessofar = new Array;
     
     for (let i=0; i < numofvariables; i++) {
         for (let j=0; j < numofvariables; j++) {
             if (i != j) {
-                covaluessofar.push(i, j);
                 var pcoffvalue = computePearsonsCoef(data[i], data[j]);
                 strongestcorrelations.set(pcoffvalue, String(data[i][0] + " + " + data[j][0]).bold());
             }
