@@ -84,6 +84,14 @@ function computePearsonsCoef(var1raw, var2raw) {
         if (var1[k] == 129.0) {
             is_total_bedrooms = true;
         }
+        if (is_total_bedrooms == true) {
+            console.log(k);
+            console.log(sumvar1);
+            if (k == 3) {
+                console.log("Here1");
+                console.log(sumvar1);
+            }
+        }
         sumvar2 += parseFloat(var2[k]);
     }
 
@@ -111,7 +119,7 @@ function computePearsonsCoef(var1raw, var2raw) {
 
     var pcoefficient = (numeratorsum / ((denominatorsum1 ** (1/2)) * (denominatorsum2 ** (1/2))));
     
-    return Math.abs(pcoefficient.toFixed(4));
+    return Math.abs(pcoefficient.toFixed(3));
 }
 
 function determineStrongestCorr(dataasarray, numofvariables) {

@@ -5,3 +5,5 @@ Statistical analysis tool which compares variables within a dataset and returns 
 
 Potential uses in data analysis and consulting.
 
+To-Do:
+
