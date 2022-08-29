@@ -85,6 +85,19 @@ function computePearsonsCoef(var1raw, var2raw) {
     var meanvar1 = (sumvar1 / var1.length);
     var meanvar2 = (sumvar2 / var2.length);
 
+    // Testing why total_bedrooms isn't working
+    
+    if (isNaN(meanvar1)) {
+        console.log(var1raw);
+        console.log(sumvar1);
+    }
+
+    if (isNaN(meanvar2)) {
+        console.log(var2raw);
+        console.log(sumvar2);
+    }
+
+
     // Calculate sum[(x_i - x_hat)(y_i - y_hat)]
     var numeratorsum = 0;
     var denominatorsum1 = 0;
