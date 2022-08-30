@@ -150,6 +150,9 @@ function determineStrongestCorr(dataasarray, numofvariables) {
   
 }
 
+var final_output = new String();
+
+
 inputdata.addEventListener('submit', function (e) {
     e.preventDefault;
     const input = csvfile.files[0];
@@ -160,16 +163,18 @@ inputdata.addEventListener('submit', function (e) {
         const data = csvToArray(text, numvar.value);
         var result = determineStrongestCorr(data, numvar.value);
         
-        //document.getElementById("result_section").innerHTML = result;
+        
+        
         //document.getElementById("show-result").innerHTML = numvar.value;
         // window.alert(JSON.stringify(data));
         // window.alert(data);
         // var basic_data = JSON.stringify(data[0]);
 
-        document.write(result);
+        //document.write(result);
       };
       reader.readAsText(input);
       
+      final_output = result
 });
 
-
+document.getElementById("output_section").innerHTML = final_output;
