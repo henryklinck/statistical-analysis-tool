@@ -150,7 +150,7 @@ function determineStrongestCorr(dataasarray, numofvariables) {
   
 }
 
-var final_output = new String();
+var final_output = "Test";
 
 
 inputdata.addEventListener('submit', function (e) {
@@ -164,17 +164,16 @@ inputdata.addEventListener('submit', function (e) {
         var result = determineStrongestCorr(data, numvar.value);
         
         
-        
+        document.write(result);
         //document.getElementById("show-result").innerHTML = numvar.value;
         // window.alert(JSON.stringify(data));
         // window.alert(data);
         // var basic_data = JSON.stringify(data[0]);
 
         //document.write(result);
+        //document.getElementById("output_section").innerHTML = "Test";
       };
       reader.readAsText(input);
       
-      final_output = result
 });
 
-document.getElementById("output_section").innerHTML = final_output;
