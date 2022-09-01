@@ -152,6 +152,14 @@ function determineStrongestCorr(dataasarray, numofvariables) {
 
 var final_output = "Test";
 
+function output_result (result) {
+    document.open();
+    document.write("<h1>Results:</h1>");
+    document.write(result);
+    document.close();
+
+}
+
 
 inputdata.addEventListener('submit', function (e) {
     e.preventDefault;
@@ -164,7 +172,8 @@ inputdata.addEventListener('submit', function (e) {
         var result = determineStrongestCorr(data, numvar.value);
         
         
-        document.write(result);
+        output_result(result);
+        //document.write(result);
         //document.getElementById("show-result").innerHTML = numvar.value;
         // window.alert(JSON.stringify(data));
         // window.alert(data);
