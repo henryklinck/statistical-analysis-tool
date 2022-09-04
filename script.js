@@ -140,10 +140,10 @@ function determineStrongestCorr(dataasarray, numofvariables) {
 
     var desc_correlation_values = correlation_values.sort(function(a, b){return b - a})
 
-    var result_message = "";
+    var result_message = [];
 
     for (let i=0; i < strongestcorrelations.size; i++) {
-        result_message = result_message + "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + " => Pearson's Correlation: " + desc_correlation_values[i] + " |---| ";
+        result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + " => Pearson's Correlation: " + desc_correlation_values[i];
     }
 
     return result_message
@@ -155,7 +155,13 @@ var final_output = "Test";
 function output_result (result) {
     document.open();
     document.write("<h1>Results:</h1>");
-    document.write(result);
+    document.write();
+    document.write("<br>");
+    //document.write("<h3> *onclick="window.print();return false; </h3>");
+    for (let j=0; j < result.length; j++) {
+        document.write(result[j]);
+        document.write("<br>");
+    }
     document.close();
 
 }
