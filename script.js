@@ -154,14 +154,20 @@ var final_output = "Test";
 
 function output_result (result) {
     document.open();
-    document.write("<h1>Results:</h1>");
-    document.write();
+    document.write('<button style="background-color: #e7e7e7; color: black; border: none; padding: 8px 16px; text-align: center; font-size: 12px;" onClick="window.location.reload();">Home</button>');
+    document.write('<body> <h1> Results: </h1>');
+    
+    document.write('<button style="background-color: #e7e7e7; color: black; border: none; padding: 15px 32px; text-align: center; font-size: 16px;" onclick="window.print()">Print Results</button>')
     document.write("<br>");
-    //document.write("<h3> *onclick="window.print();return false; </h3>");
+    document.write("<br>");
+    document.write("Note: All Person Correlation Values are *absolute* values");
+    document.write("<br>");
+    document.write("<br>");
     for (let j=0; j < result.length; j++) {
         document.write(result[j]);
         document.write("<br>");
     }
+    document.write(" </body>")
     document.close();
 
 }
@@ -179,14 +185,6 @@ inputdata.addEventListener('submit', function (e) {
         
         
         output_result(result);
-        //document.write(result);
-        //document.getElementById("show-result").innerHTML = numvar.value;
-        // window.alert(JSON.stringify(data));
-        // window.alert(data);
-        // var basic_data = JSON.stringify(data[0]);
-
-        //document.write(result);
-        //document.getElementById("output_section").innerHTML = "Test";
       };
       reader.readAsText(input);
       
