@@ -192,7 +192,12 @@ function determineStrongestCorr(dataasarray, numofvariables) {
 
     for (let i=0; i < strongestcorrelations.size; i++) {
         var spearmancoffvalue = computeSpearmansCoef(data[strongestcorrelations.get(desc_correlation_values[i])[1][0]], data[strongestcorrelations.get(desc_correlation_values[i])[1][1]]);
-        result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0] + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
+        if (desc_correlation_values[i] >= 0.5) {
+            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0].bold() + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
+        } else {
+            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0] + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
+        }
+        
     }
 
     return result_message
@@ -210,6 +215,8 @@ function output_result (result) {
     document.write("<br>");
     document.write("<br>");
     document.write("Note: All Person Correlation Values are *absolute* values");
+    document.write("<br");
+    document.write("Bolded Correlations have a Pearson Coefficient >= 0.5");
     document.write("<br>");
     document.write("<br>");
     for (let j=0; j < result.length; j++) {
