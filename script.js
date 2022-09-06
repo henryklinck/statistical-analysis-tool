@@ -77,31 +77,13 @@ function computePearsonsCoef(var1raw, var2raw) {
     var sumvar1 = 0;
     var sumvar2 = 0;
 
-    var is_total_bedrooms = false;
-
     for (let k=0; k < (var1.length - 1); k++) {
         sumvar1 += parseFloat(var1[k]);
-        if (var1[k] == 129.0) {
-            is_total_bedrooms = true;
-        }
-        if (is_total_bedrooms == true) {
-            console.log(k);
-            console.log(sumvar1);
-            if (k == 3) {
-                console.log("Here1");
-                console.log(sumvar1);
-            }
-        }
         sumvar2 += parseFloat(var2[k]);
     }
 
     var meanvar1 = (sumvar1 / var1.length);
     var meanvar2 = (sumvar2 / var2.length);
-
-    if (is_total_bedrooms == true) {
-        console.log("Here");
-        console.log(sumvar1);
-    }
 
     // Calculate sum[(x_i - x_hat)(y_i - y_hat)]
     var numeratorsum = 0;
@@ -122,6 +104,71 @@ function computePearsonsCoef(var1raw, var2raw) {
     return Math.abs(pcoefficient.toFixed(3));
 }
 
+
+function computeSpearmansCoef(var1raw, var2raw) {
+    // assume numerical data and ordinal data (in order) or boolean catergorical data
+    
+    var var1 = var1raw.slice(1);
+    var var2 = var2raw.slice(1);
+
+    if (isNaN(var1[0])) {
+        var1type = "categorical";
+        var numvar1 = [];
+        var varvalues1 = [];
+        for (let i=0; i < var1.length; i++) {
+            if (!(varvalues1.includes(var1[i]))) {
+                 varvalues1.push(var1[i]);
+             }
+             numvar1[i] = varvalues1.indexOf(var1[i]);
+         }
+         if (varvalues1.length < 2) {
+             window.alert(var1raw[0] + "Has only 1 element")
+             return
+         }
+         var1 = numvar1;
+     }
+      
+     if (isNaN(var2[0])) {
+         var2type = "categorical";
+         var numvar2 = [];
+         var varvalues2 = [];
+         for (let j=0; j < var2.length; j++) {
+             if (!(varvalues2.includes(var2[j]))) {
+                 varvalues2.push(var2[j]);
+             }
+             numvar2[j] = varvalues2.indexOf(var2[j]);
+         }
+         if (varvalues2.length < 2) {
+             window.alert(var2raw[0] + "Has only 1 element")
+         }
+         var2 = numvar2;
+     }
+    
+    // sort var1 (increasing order) while saving index values of each point
+
+    var points = [];
+    for (i=0; i < var1.length; i++) {
+        var single_point = [parseFloat(var1[i]), parseFloat(var2[i])];
+        points.push(single_point);
+    }
+    points.sort(function(a, b){return a[0] - b[0]});
+    
+
+    //determine sum(difference between the two ranks of each observation^2)
+    var sum_diff_ranks_so_far = 0;
+    
+    for (j=0; j < (var1.length - 1); j++) {
+        sum_diff_ranks_so_far += ((points[j][1] - points[(j + 1)][1]) ** 2);
+    }
+    
+    var n = var1.length;
+
+    var p_1 = 1 - ((6 * sum_diff_ranks_so_far) / (n * (n ** 2) - 1))
+
+    return Math.abs(p_1.toFixed(5)); 
+}
+
+
 function determineStrongestCorr(dataasarray, numofvariables) {
     // Return list of strongest correlations and the associated correlation coefficients
     const data = dataasarray;
@@ -131,7 +178,8 @@ function determineStrongestCorr(dataasarray, numofvariables) {
         for (let j=0; j < numofvariables; j++) {
             if (i != j) {
                 var pcoffvalue = computePearsonsCoef(data[i], data[j]);
-                strongestcorrelations.set(pcoffvalue, String(data[i][0] + " + " + data[j][0]).bold());
+                var spearmancoffvalue = computeSpearmansCoef(data[i], data[j]);
+                strongestcorrelations.set(pcoffvalue, [String(data[i][0] + " + " + data[j][0]), [i, j]]);
             }
         }
     }
@@ -143,7 +191,8 @@ function determineStrongestCorr(dataasarray, numofvariables) {
     var result_message = [];
 
     for (let i=0; i < strongestcorrelations.size; i++) {
-        result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i]) + " => Pearson's Correlation: " + desc_correlation_values[i];
+        var spearmancoffvalue = computeSpearmansCoef(data[strongestcorrelations.get(desc_correlation_values[i])[1][0]], data[strongestcorrelations.get(desc_correlation_values[i])[1][1]]);
+        result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0] + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
     }
 
     return result_message
