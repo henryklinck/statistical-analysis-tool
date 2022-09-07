@@ -144,7 +144,7 @@ function computeSpearmansCoef(var1raw, var2raw) {
          var2 = numvar2;
      }
     
-    // sort var1 (increasing order) while saving index values of each point
+    // sort var1 (increasing order)
 
     var points = [];
     for (i=0; i < var1.length; i++) {
@@ -153,13 +153,12 @@ function computeSpearmansCoef(var1raw, var2raw) {
     }
     points.sort(function(a, b){return a[0] - b[0]});
     
-
     //determine sum(difference between the two ranks of each observation^2)
-    var sum_diff_ranks_so_far = 0;
-    
-    for (j=0; j < (var1.length - 1); j++) {
-        sum_diff_ranks_so_far += ((points[j][1] - points[(j + 1)][1]) ** 2);
-    }
+
+    // Incorrect implementation below - not setting rankings as needed:
+    //for (j=0; j < (var1.length - 1); j++) {
+    //    sum_diff_ranks_so_far += ((points[j][1] - points[(j + 1)][1]) ** 2);
+    //}
     
     var n = var1.length;
 

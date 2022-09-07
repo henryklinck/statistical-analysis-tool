@@ -6,8 +6,8 @@ Statistical analysis tool which compares variables within a dataset and returns 
 Potential uses in data analysis and consulting.
 
 To-Do:
-- Measure Monotonic Correlation bug fixes
-    - Some values output value >1.
+- Measure Monotonic Correlation bug fixes: Currently Innaccurate.
+    - Some values output value > 1.
 - User-friendly output:
     - Labeling 'strong', 'weak' correlations - related images?
 - Built-in "saftey nets" that ignores inncorrectly formatted or missing observations.
