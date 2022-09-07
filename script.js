@@ -160,11 +160,11 @@ function computeSpearmansCoef(var1raw, var2raw) {
     //    sum_diff_ranks_so_far += ((points[j][1] - points[(j + 1)][1]) ** 2);
     //}
     
-    var n = var1.length;
+    //var n = var1.length;
 
-    var p_1 = 1 - ((6 * sum_diff_ranks_so_far) / (n * (n ** 2) - 1))
+    //var p_1 = 1 - ((6 * sum_diff_ranks_so_far) / (n * (n ** 2) - 1))
 
-    return Math.abs(p_1.toFixed(5)); 
+    //return Math.abs(p_1.toFixed(5)); 
 }
 
 
@@ -190,11 +190,11 @@ function determineStrongestCorr(dataasarray, numofvariables) {
     var result_message = [];
 
     for (let i=0; i < strongestcorrelations.size; i++) {
-        var spearmancoffvalue = computeSpearmansCoef(data[strongestcorrelations.get(desc_correlation_values[i])[1][0]], data[strongestcorrelations.get(desc_correlation_values[i])[1][1]]);
+        //var spearmancoffvalue = computeSpearmansCoef(data[strongestcorrelations.get(desc_correlation_values[i])[1][0]], data[strongestcorrelations.get(desc_correlation_values[i])[1][1]]);
         if (desc_correlation_values[i] >= 0.5) {
-            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0].bold() + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
+            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0].bold() + " => Pearson's Correlation: " + desc_correlation_values[i] /*+ " - Spearman's Correlation: " + spearmancoffvalue*/;
         } else {
-            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0] + " => Pearson's Correlation: " + desc_correlation_values[i] + " - Spearman's Correlation: " + spearmancoffvalue;
+            result_message[i] = "Correlation " + (i+1) + ": " + strongestcorrelations.get(desc_correlation_values[i])[0] + " => Pearson's Correlation: " + desc_correlation_values[i] /*+ " - Spearman's Correlation: " + spearmancoffvalue*/;
         }
         
     }
