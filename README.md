@@ -12,3 +12,5 @@ To-Do:
     - Labeling 'strong', 'weak' correlations - related images?
 - Built-in "saftey nets" that ignores inncorrectly formatted or missing observations.
 - Second page that allows user to make their data "tidy"/usable.
+
+![readme_image](https://user-images.githubusercontent.com/95884348/188979521-3bcfe980-1c45-4bc8-a8ae-82766c2b4097.jpg)
