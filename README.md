@@ -16,3 +16,6 @@ To-Do:
 ## Example Use Case:
 
 ![readme_image](https://user-images.githubusercontent.com/95884348/188979521-3bcfe980-1c45-4bc8-a8ae-82766c2b4097.jpg)
+
+Analysts can use these results to better understand the data.
+These results can potentially highlight unexpected correlations in a dataset, which can then be further investigated. 
