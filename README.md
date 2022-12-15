@@ -1,4 +1,4 @@
-# The Lookout Point Data Analytics Tool
+# The Lookout-Point Data Analytics Tool
 
 Statistical analysis tool which compares variables within a dataset and returns correlations between strongest correlated variables.
 
