@@ -1,13 +1,11 @@
-# statistical-analysis-tool
-"The Lookout Point Data Analytics Tool" -
+# The Lookout Point Data Analytics Tool
 
 Statistical analysis tool which compares variables within a dataset and returns correlations between strongest correlated variables.
 
-Potential uses in data analysis and consulting.
+Potential uses in data analysis and management consulting.
 
 To-Do:
-- Measure Monotonic Correlation bug fixes: Currently Innaccurate.
-    - Some values output value > 1.
+- Measure Monotonic Correlation bug fixes: Current Innaccuracies.
 - User-friendly output:
     - Labeling 'strong', 'weak' correlations - related images?
 - Built-in "saftey nets" that ignores inncorrectly formatted or missing observations.
